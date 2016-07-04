@@ -7,6 +7,8 @@ import org.apache.jmeter.samplers.AbstractSampler;
 import org.apache.jmeter.samplers.Entry;
 import org.apache.jmeter.samplers.SampleResult;
 import org.apache.jmeter.testbeans.TestBean;
+import org.apache.jmeter.threads.JMeterContextService;
+import org.apache.jmeter.threads.JMeterVariables;
 import org.apache.jorphan.logging.LoggingManager;
 import org.apache.log.Logger;
 
@@ -55,7 +57,7 @@ public class ExampleSampler extends  AbstractSampler implements TestBean{
 
         res.setSampleLabel(getTitle());
 
-        org.apache.jmeter.engine.StandardJMeterEngine.stopThread(Thread.currentThread().getName());
+//        org.apache.jmeter.engine.StandardJMeterEngine.stopThread(Thread.currentThread().getName());
         /*
          * Perform the sampling
          */
@@ -64,6 +66,12 @@ public class ExampleSampler extends  AbstractSampler implements TestBean{
 
             System.out.println("aaa");
 
+            JMeterVariables vars = JMeterContextService.getContext().getVariables();
+            String checkpoint = vars.get("test");
+
+            vars.put("testA","testAAA");
+
+            System.out.println(checkpoint);
 
         	// Do something here ...
 
